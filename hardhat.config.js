@@ -19,19 +19,19 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
-const defaultNetwork = 'kovan';
+// const defaultNetwork = 'kovan';
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  defaultNetwork,
+  // defaultNetwork,
   solidity: "0.8.0",
-  networks: {
-    kovan: {
-      url: `${process.env.KOVAN_URL}`,
-      accounts: [`${process.env.PRIVATE_KEY}`]
-    }
-  },
+  // networks: {
+  //   kovan: {
+  //     url: `${process.env.KOVAN_URL}`,
+  //     accounts: [`${process.env.PRIVATE_KEY}`]
+  //   }
+  // },
   namedAccounts: {
     deployer: 0
   }
