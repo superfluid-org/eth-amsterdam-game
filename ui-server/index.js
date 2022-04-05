@@ -956,7 +956,7 @@ app.post("/create-stream", async (req, res) => {
               });
             
               //on kovan
-              const faucetAddress = "0xFf3e1498E770109933Ecc285A81d83Bc37cABd7b";
+              const faucetAddress = "0x40CC9A25704C9050ea21eB5a34726FC56CFAF9BA";
                           
               const faucetContract = new ethers.Contract(
                 faucetAddress,
@@ -967,7 +967,7 @@ app.post("/create-stream", async (req, res) => {
               const hashedCode = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(_code + "mister mister"));
               
               try {
-                await faucetContract.connect(signer).createDAIxFlow(hashedCode, _address);
+                await faucetContract.connect(signer).createFlow(hashedCode, _address);
             
                 console.log("Creating your stream...");
             
@@ -976,9 +976,9 @@ app.post("/create-stream", async (req, res) => {
                 console.log(
                   "Hmmm, your transaction threw an error. Make sure that this stream does not already exist, and that you've entered a valid Ethereum address!"
                 );
-                res.status(500).send('stream not created')
+                res.status(500).send('stream not created');
 
-                res.json("error - stream not created")
+                res.json("error - stream not created");
                 return
                 console.error(error);
               }

@@ -75,6 +75,7 @@ beforeEach(async function () {
     let App = await ethers.getContractFactory("ETHAmsterdamFaucet");    
     
     faucet = await App.deploy(
+        //NOTE - testing with fDAIx instead of FRENS
         fDAIx.address,
         sf.settings.config.hostAddress,
     );
@@ -116,7 +117,7 @@ describe("sending flows", async function () {
         
         const hash1 = ethers.utils.keccak256(ethers.utils.toUtf8Bytes("Sp43Xk" + "mister mister"));
 
-        await faucet.connect(accounts[0]).createDAIxFlow(hash1, accounts[1].address);
+        await faucet.connect(accounts[0]).createFlow(hash1, accounts[1].address);
 
         const appFlowRate = await sf.cfaV1.getNetFlow({
             superToken: fDAIx.address,
@@ -163,7 +164,7 @@ describe("sending flows", async function () {
         console.log("checking code already used");
         
         await expectRevert(
-            faucet.connect(accounts[0]).createDAIxFlow(hash1, accounts[3].address),
+            faucet.connect(accounts[0]).createFlow(hash1, accounts[3].address),
             "code has already been used"
         );
         
@@ -171,7 +172,7 @@ describe("sending flows", async function () {
 
         //should revert with superfluid error as 2 flows can't be created to same address
         await expectRevert(
-            faucet.connect(accounts[0]).createDAIxFlow(hash2, accounts[1].address),
+            faucet.connect(accounts[0]).createFlow(hash2, accounts[1].address),
             "CFA: flow already exist"
         );
 

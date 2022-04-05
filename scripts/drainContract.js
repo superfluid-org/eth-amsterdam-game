@@ -31,7 +31,7 @@ async function main() {
   });
 
   
-  const deployedContract = new ethers.Contract("0xEd0E28be80cF8DbA415714f6199A092FD7Af0087", faucetABI, customHttpProvider);
+  const deployedContract = new ethers.Contract("0xA54C60857Ec602Ea9659c23D5Dc554b6daDe1edf", faucetABI, customHttpProvider);
 
   console.log(deployedContract);
   

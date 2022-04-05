@@ -26,12 +26,13 @@ async function main() {
     provider: customHttpProvider
   });
 
-  const DAIx = await sf.loadSuperToken("0xe3cb950cb164a31c66e32c320a800d477019dcff");
+  //loading frens token on Kovan
+  const frens = await sf.loadSuperToken("0x738ab61234dA221d6d63EBac5a82222839635727");
   
   console.log("running approval...");
   
-  const approveOperation = DAIx.approve({
-      receiver: "0xFf3e1498E770109933Ecc285A81d83Bc37cABd7b",
+  const approveOperation = frens.approve({
+      receiver: "0x40CC9A25704C9050ea21eB5a34726FC56CFAF9BA",
       amount: ethers.utils.parseUnits("100000").toString()
   });;
 
@@ -40,20 +41,38 @@ async function main() {
   const receipt = await txn.wait();
   console.log(receipt);
 
-  const allowance = await DAIx.allowance({owner: signer.address, spender: "0xFf3e1498E770109933Ecc285A81d83Bc37cABd7b", providerOrSigner: customHttpProvider});
+  const allowance = await frens.allowance({owner: signer.address, spender: "0x40CC9A25704C9050ea21eB5a34726FC56CFAF9BA", providerOrSigner: customHttpProvider});
   console.log("new allowance: ", allowance);
       
 
-  const deployedContract = new ethers.Contract("0xFf3e1498E770109933Ecc285A81d83Bc37cABd7b", TokenFaucetABI, customHttpProvider);
-  
+  const deployedContract = new ethers.Contract("0x40CC9A25704C9050ea21eB5a34726FC56CFAF9BA", TokenFaucetABI, customHttpProvider);
 
   console.log("funding the contract...");
 
-  await deployedContract.connect(signer).fundContract(ethers.utils.parseEther("10000")).then(console.log);
+  await deployedContract.connect(signer).fundContract(ethers.utils.parseEther("10000"));
   
-  const contractBalance = await DAIx.balanceOf({account: "0xFf3e1498E770109933Ecc285A81d83Bc37cABd7b", providerOrSigner: customHttpProvider});
+  const contractBalance = await frens.balanceOf({account: "0x40CC9A25704C9050ea21eB5a34726FC56CFAF9BA", providerOrSigner: customHttpProvider});
 
   console.log("contract balance: ", contractBalance);
+
+  // Create a transaction object
+  let tx = {
+    to: deployedContract.address,
+    // Convert currency unit from ether to wei
+    value: ethers.utils.parseEther("0.5"),
+    gasPrice: 100000000000
+}       
+
+  await signer.sendTransaction(tx)
+  .then((txObj) => {
+      console.log('txHash', txObj.hash)
+      // A transaction result can be checked in a etherscan with a transaction hash which can be obtained here.
+  });
+
+  const contractETHBalance = await ethers.JsonRpcProvider.getBalance(deployedContract.address);
+  console.log(contractETHBalance);
+
+  
 }
 
 // We recommend this pattern to be able to use async/await everywhere

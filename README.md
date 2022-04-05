@@ -33,3 +33,4 @@
 ## Other Notes
 1) A QR code will be generated which is connected to the front end. We will need our front end to remain at a persistent domain in case changes are made
 2) It may be necessary to make last second cosmetic changes that involve both the front end and lambda function. Ideally we can make these changes without breaking the link between the domain and QR code. 
+3) The last deployment of $FRENS fake token on Kovan is deployed at `0x738ab61234dA221d6d63EBac5a82222839635727` as of April 5, 2022 at 5pm EST

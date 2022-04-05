@@ -1,6 +1,7 @@
 
 const host = '0xF0d7d1D47109bA426B9D8A3Cde1941327af1eea3';
-const fDAIx = '0xe3cb950cb164a31c66e32c320a800d477019dcff';
+//NOTE - this is the address of the most recent deployment of FRENS. You can find this recording in the README.md file.
+const frens = '0x738ab61234dA221d6d63EBac5a82222839635727';
 require("@nomiclabs/hardhat-ethers");
 
 module.exports = async ({ getNamedAccounts, deployments }) => {
@@ -11,7 +12,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   
     await deploy("ETHAmsterdamFaucet", {
       from: deployer,
-      args: [fDAIx, host],
+      args: [frens, host],
       log: true,
     })
 }

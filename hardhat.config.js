@@ -2,10 +2,10 @@ require("@nomiclabs/hardhat-waffle");
 require('@openzeppelin/hardhat-upgrades');
 require("@nomiclabs/hardhat-web3");
 require("@nomiclabs/hardhat-ethers");
+require("@nomiclabs/hardhat-etherscan");
 require('hardhat-deploy');
 require("dotenv").config();
 require('@openzeppelin/hardhat-upgrades');
-
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -19,20 +19,23 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
-// const defaultNetwork = 'kovan';
+const defaultNetwork = 'kovan';
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  // defaultNetwork,
-  solidity: "0.8.0",
-  // networks: {
-  //   kovan: {
-  //     url: `${process.env.KOVAN_URL}`,
-  //     accounts: [`${process.env.PRIVATE_KEY}`]
-  //   }
-  // },
+  defaultNetwork,
+  solidity: "0.8.12",
+  networks: {
+    kovan: {
+      url: `${process.env.KOVAN_URL}`,
+      accounts: [`${process.env.PRIVATE_KEY}`]
+    }
+  },
   namedAccounts: {
     deployer: 0
+  },
+  etherscan: {
+    apiKey: `${process.env.ETHERSCAN_API_KEY}`
   }
 };

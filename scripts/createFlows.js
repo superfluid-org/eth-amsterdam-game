@@ -34,7 +34,7 @@ async function main() {
       provider: customHttpProvider
     });
 
-    const deployedContract = new ethers.Contract("0xFf3e1498E770109933Ecc285A81d83Bc37cABd7b", TokenFaucetABI, customHttpProvider);
+    const deployedContract = new ethers.Contract("0x40CC9A25704C9050ea21eB5a34726FC56CFAF9BA", TokenFaucetABI, customHttpProvider);
   
     const hashedCode = ethers.utils.keccak256(ethers.utils.toUtf8Bytes("Sp43Xk" + "mister mister"));
             
@@ -42,23 +42,8 @@ async function main() {
 
     console.log("creating a stream from contract...");
   
-    await deployedContract.connect(signer).createDAIxFlow(hashedCode, "0x9421FE8eCcAfad76C3A9Ec8f9779fAfA05A836B3").then(console.log);
+    await deployedContract.connect(signer).createFlow(hashedCode, "0x9421FE8eCcAfad76C3A9Ec8f9779fAfA05A836B3").then(console.log);
 
-  //helper script for getting exit rate for pic
-  // const deployedContract = new ethers.Contract("0xA7bCdEEFA966720549C6129D5B864930355012A4", TokenFaucetABI, customHttpProvider);
-
-  // console.log(deployedContract);
-  
-
-  // await deployedContract.connect(signer).createFlow("0x7f84f44127F4337a16820321658903c01F06D622").then(console.log);
-
-  // We get the contract to deploy
-//   const Greeter = await hre.ethers.getContractFactory("Greeter");
-//   const greeter = await Greeter.deploy("Hello, Hardhat!");
-
-//   await greeter.deployed();
-
-//   console.log("Greeter deployed to:", greeter.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
