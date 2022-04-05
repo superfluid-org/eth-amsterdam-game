@@ -10,8 +10,6 @@ import {IConstantFlowAgreementV1} from "@superfluid-finance/ethereum-contracts/c
 import {CFAv1Library} from "@superfluid-finance/ethereum-contracts/contracts/apps/CFAv1Library.sol";
 import { Ownable } from "@openzeppelin/contracts/access/Ownable.sol";
 
-import "hardhat/console.sol";
-
 contract ETHAmsterdamFaucet is Ownable {
     using CFAv1Library for CFAv1Library.InitData;
     //initialize cfaV1 variable
