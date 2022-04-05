@@ -79,7 +79,7 @@ export const CreateFlow = () => {
       </p>
       <p>
         1) Enter your Ethereum address and your unique code to claim a
-        Superfluid money stream and Kovan ETH (for gas fees).
+        Superfluid money stream and Kovan ETH (for gas fees). If you head to the dashboard, you'll see that you're receiving a stream of $FRENS tokens on Kovan. NOTE: these are fake tokens - they're just for fun!
       </p>
       <p>
 
