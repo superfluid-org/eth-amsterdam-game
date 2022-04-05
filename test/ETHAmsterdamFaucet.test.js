@@ -111,15 +111,11 @@ describe("sending flows", async function () {
             providerOrSigner: accounts[0]
         });
 
-        const account1Code = await faucet.addressToCode(accounts[1].address);
         const account1CodeStatus = await faucet.usedCodes(hash1);
-        const checkAccountsMapping = await faucet.addressToCode(accounts[2].address);
         const hash2 = ethers.utils.keccak256(ethers.utils.toUtf8Bytes("lXAF32" + "mister mister"));
         const checkCodeStatus = await faucet.usedCodes(hash2);
         const usedAddresses = await faucet.usedAddresses(accounts[1].address);
-        console.log("account 1 code: ", account1Code);
         console.log("account 1 code status: ", account1CodeStatus);
-        console.log("check accounts mapping (should be 0) ", checkAccountsMapping);
         console.log("check code status (should be false), ", checkCodeStatus);
         console.log("used addresses: ", usedAddresses);
 
@@ -133,9 +129,7 @@ describe("sending flows", async function () {
             "App flowRate not sending correct flowRate of ~$1000 per day"
         );
 
-        assert.equal(hash1, account1Code, "account 1 code is incorrect");
         assert.equal(checkCodeStatus, false, "code status mapping not working as expected");
-        assert.equal(checkAccountsMapping, "0x", "account to code mapping not working as expected");
 
         console.log("checking code already used");
         
