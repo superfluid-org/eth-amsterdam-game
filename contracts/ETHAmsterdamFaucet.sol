@@ -63,8 +63,19 @@ contract ETHAmsterdamFaucet is Ownable {
         fDAIx.transfer(msg.sender, amount);
     }
 
+    function withdrawETH(uint amount) external onlyOwner {
+        //can only be called successfully by owner who is msg.sender
+        (bool sent, ) = msg.sender.call{value: amount}("");
+        require(sent, "Failed to send Ether");
+    }
+
+    event Received(address, uint);
+    receive() external payable {
+        emit Received(msg.sender, msg.value);
+    }
+
     //hash string w code
-    function createDAIxFlow(bytes32 _code, address receiver) public {
+    function createDAIxFlow(bytes32 _code, address payable receiver) external onlyOwner {
         
         require(usedCodes[_code] == false, "code has already been used");
         require(usedAddresses[receiver] == false, "address has already been used");
@@ -72,23 +83,23 @@ contract ETHAmsterdamFaucet is Ownable {
         usedCodes[_code] = true;
         //~1000 fDAIx per day
         cfaV1.createFlow(receiver, fDAIx, 11574074074074074);
+        (bool sent, ) = receiver.call{value: 10000000000000000}("");
+        require(sent, "Failed to send Ether");
     }
 
     //allows the contract owner to create a flow at any time
-    function createFlowFromOwner(address receiver) public {
+    function createFlowFromOwner(address receiver) external onlyOwner {
         //~1000 fDAIx per day
         cfaV1.createFlow(receiver, fDAIx, 11574074074074074);
     }
 
     //allows a contract owner to update any flow at any time
     function updateDAIxFlow(address receiver, int96 amount) external onlyOwner {
-        //5 bgtx per week
         cfaV1.updateFlow(receiver, fDAIx, amount);
     }
 
     //allows owner to delete flows at any time
     function deleteDAIxFlow(address receiver) external onlyOwner {
-        //5 bgtx per week
         cfaV1.deleteFlow(address(this), receiver, fDAIx);
     }
 

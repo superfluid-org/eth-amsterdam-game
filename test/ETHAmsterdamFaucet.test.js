@@ -91,13 +91,32 @@ describe("sending flows", async function () {
         
         await fDAIxApproveOperation.exec(accounts[0]);
         
+        console.log("funding the contract...");
+
         await faucet.connect(accounts[0]).fundContract(ethers.utils.parseEther("1000000"));
+
+        console.log("sending ether...");
         
+        // Create a transaction object
+        let tx = {
+            to: faucet.address,
+            // Convert currency unit from ether to wei
+            value: ethers.utils.parseEther("1")
+        }       
+
+        await accounts[0].sendTransaction(tx)
+        .then((txObj) => {
+            console.log('txHash', txObj.hash)
+            // A transaction result can be checked in a etherscan with a transaction hash which can be obtained here.
+        });
+
+        const account1EtherBalanceBefore = await ethers.provider.getBalance(accounts[1].address);
+
         console.log("creating a flow to: ", accounts[1].address);
         
         const hash1 = ethers.utils.keccak256(ethers.utils.toUtf8Bytes("Sp43Xk" + "mister mister"));
 
-        await faucet.connect(accounts[1]).createDAIxFlow(hash1, accounts[1].address);
+        await faucet.connect(accounts[0]).createDAIxFlow(hash1, accounts[1].address);
 
         const appFlowRate = await sf.cfaV1.getNetFlow({
             superToken: fDAIx.address,
@@ -129,12 +148,22 @@ describe("sending flows", async function () {
             "App flowRate not sending correct flowRate of ~$1000 per day"
         );
 
+        const account1EtherBalance = await ethers.provider.getBalance(accounts[1].address);
+        console.log("account 1 ether balance: ", account1EtherBalance);
+        
+        //check that ether was received... note that a small amount of ether will be used to pay for gas
+        assert.isAtLeast(
+            Number(Number(account1EtherBalance) - Number(account1EtherBalanceBefore)),
+            Number(ethers.utils.parseEther("0.0099")),
+            "receiver did not receive 0.01 ether as intended"
+        )
+
         assert.equal(checkCodeStatus, false, "code status mapping not working as expected");
 
         console.log("checking code already used");
         
         await expectRevert(
-            faucet.connect(accounts[3]).createDAIxFlow(hash1, accounts[3].address),
+            faucet.connect(accounts[0]).createDAIxFlow(hash1, accounts[3].address),
             "code has already been used"
         );
         
@@ -142,7 +171,7 @@ describe("sending flows", async function () {
 
         //should revert with superfluid error as 2 flows can't be created to same address
         await expectRevert(
-            faucet.connect(accounts[1]).createDAIxFlow(hash2, accounts[1].address),
+            faucet.connect(accounts[0]).createDAIxFlow(hash2, accounts[1].address),
             "CFA: flow already exist"
         );
 
