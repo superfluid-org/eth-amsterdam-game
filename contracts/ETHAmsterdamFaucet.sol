@@ -49,8 +49,7 @@ contract ETHAmsterdamFaucet is Ownable {
             );
     }
 
-    mapping (address => bytes) public addressToCode;
-    mapping (bytes => bool) public usedCodes;
+    mapping (bytes32 => bool) public usedCodes;
     mapping (address => bool) public usedAddresses;
 
 
@@ -65,12 +64,11 @@ contract ETHAmsterdamFaucet is Ownable {
     }
 
     //hash string w code
-    function createDAIxFlow(bytes memory _code, address receiver) public {
+    function createDAIxFlow(bytes32 _code, address receiver) public {
         
         require(usedCodes[_code] == false, "code has already been used");
         require(usedAddresses[receiver] == false, "address has already been used");
 
-        addressToCode[receiver] = _code;
         usedCodes[_code] = true;
         //~1000 fDAIx per day
         cfaV1.createFlow(receiver, fDAIx, 11574074074074074);
