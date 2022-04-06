@@ -17,8 +17,6 @@ contract ETHAmsterdamFaucet is Ownable {
 
     ISuperToken public frens;
 
-    IConstantFlowAgreementV1 public cfa;
-
     constructor(ISuperToken _frens, ISuperfluid host) {
       frens = _frens;
 
@@ -35,16 +33,6 @@ contract ETHAmsterdamFaucet is Ownable {
                 )
             )
         );
-
-        cfa = IConstantFlowAgreementV1(
-                address(
-                    host.getAgreementClass(
-                        keccak256(
-                            "org.superfluid-finance.agreements.ConstantFlowAgreement.v1"
-                        )
-                    )
-                )
-            );
     }
 
     mapping (bytes32 => bool) public usedCodes;
