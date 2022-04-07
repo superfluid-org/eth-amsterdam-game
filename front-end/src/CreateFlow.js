@@ -14,7 +14,7 @@ async function createNewFlow(code, address) {
         body: JSON.stringify(body)
     });
 
-    if (response.status == 200) {
+    if (response.status === 200) {
         console.log(`Congrats - you've just created a money stream!`);
     }
     else {
