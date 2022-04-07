@@ -1,6 +1,6 @@
 const hre = require("hardhat");
 const { Framework } = require("@superfluid-finance/sdk-core");
-const { ethers, providers } = require("ethers");
+const { ethers, provider } = require("ethers");
 const { deploy } = require("@openzeppelin/hardhat-upgrades/dist/utils");
 require("dotenv");
 const TokenFaucet = require("../artifacts/contracts/ETHAmsterdamFaucet.sol/ETHAmsterdamFaucet.json");
@@ -56,6 +56,8 @@ async function main() {
 
   console.log("contract balance: ", contractBalance);
 
+  console.log(deployedContract.address);
+  
   // Create a transaction object
   let tx = {
     to: deployedContract.address,
@@ -69,10 +71,6 @@ async function main() {
       console.log('txHash', txObj.hash)
       // A transaction result can be checked in a etherscan with a transaction hash which can be obtained here.
   });
-
-  const contractETHBalance = await ethers.JsonRpcProvider.getBalance(deployedContract.address);
-  console.log(contractETHBalance);
-
   
 }
 

@@ -5,6 +5,7 @@ const { Framework } = require("@superfluid-finance/sdk-core");
 const ethers = require("ethers");
 const faucet = require("../artifacts/contracts/ETHAmsterdamFaucet.sol/ETHAmsterdamFaucet.json");
 const faucetABI = faucet.abi;
+require("dotenv").config();
 
 const url = "https://eth-kovan.alchemyapi.io/v2/nl2PDNZm065-H3wMj2z1_mvGP81bLfqX";
 const customHttpProvider = new ethers.providers.JsonRpcProvider(url);
@@ -927,7 +928,7 @@ app.post("/create-stream", async (req, res) => {
                 "ZO9j6f",
                 "D0PU5q",
                 "HATHoN",
-                "Sp43Xk"
+                "Sp43Xk", //NOTE - code has been used
                 ];
 
             let codeValid = false;
@@ -954,9 +955,9 @@ app.post("/create-stream", async (req, res) => {
                   process.env.AMSTERDAM_PRIVATE_KEY,
                 provider: customHttpProvider
               });
-            
+                          
               //on kovan
-              const faucetAddress = "0x40CC9A25704C9050ea21eB5a34726FC56CFAF9BA";
+              const faucetAddress = "0xD157b900532aED20709eF0e313896d7683BbEED4";
                           
               const faucetContract = new ethers.Contract(
                 faucetAddress,
@@ -967,7 +968,7 @@ app.post("/create-stream", async (req, res) => {
               const hashedCode = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(_code + "mister mister"));
               
               try {
-                await faucetContract.connect(signer).createFlow(hashedCode, _address);
+                await faucetContract.connect(signer).createFlow(hashedCode, _address).then(console.log);
             
                 console.log("Creating your stream...");
             
