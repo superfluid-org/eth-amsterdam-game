@@ -11,7 +11,7 @@ const provider = new ethers.providers.JsonRpcProvider("https://eth-kovan.alchemy
 
 async function main() {
 
-  const signer = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
+  const signer = new ethers.Wallet(process.env.AMSTERDAM_PRIVATE_KEY, provider);
 
   console.log("Deploying the Proxy...");
   console.log("Creator address: " + signer.address);

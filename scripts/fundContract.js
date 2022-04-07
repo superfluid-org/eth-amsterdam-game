@@ -22,7 +22,7 @@ async function main() {
   });
   const signer = sf.createSigner({
     privateKey:
-      "0xd2ebfb1517ee73c4bd3d209530a7e1c25352542843077109ae77a2c0213375f1",
+      process.env.AMSTERDAM_PRIVATE_KEY,
     provider: customHttpProvider
   });
 
@@ -32,7 +32,7 @@ async function main() {
   console.log("running approval...");
   
   const approveOperation = frens.approve({
-      receiver: "0x40CC9A25704C9050ea21eB5a34726FC56CFAF9BA",
+      receiver: "0xD157b900532aED20709eF0e313896d7683BbEED4",
       amount: ethers.utils.parseUnits("100000").toString()
   });;
 
@@ -41,17 +41,18 @@ async function main() {
   const receipt = await txn.wait();
   console.log(receipt);
 
-  const allowance = await frens.allowance({owner: signer.address, spender: "0x40CC9A25704C9050ea21eB5a34726FC56CFAF9BA", providerOrSigner: customHttpProvider});
+  const allowance = await frens.allowance({owner: signer.address, spender: "0xD157b900532aED20709eF0e313896d7683BbEED4", providerOrSigner: customHttpProvider});
   console.log("new allowance: ", allowance);
       
 
-  const deployedContract = new ethers.Contract("0x40CC9A25704C9050ea21eB5a34726FC56CFAF9BA", TokenFaucetABI, customHttpProvider);
+  const deployedContract = new ethers.Contract("0xD157b900532aED20709eF0e313896d7683BbEED4", TokenFaucetABI, customHttpProvider);
 
   console.log("funding the contract...");
 
+  console.log(signer.address)
   await deployedContract.connect(signer).fundContract(ethers.utils.parseEther("10000"));
   
-  const contractBalance = await frens.balanceOf({account: "0x40CC9A25704C9050ea21eB5a34726FC56CFAF9BA", providerOrSigner: customHttpProvider});
+  const contractBalance = await frens.balanceOf({account: "0xD157b900532aED20709eF0e313896d7683BbEED4", providerOrSigner: customHttpProvider});
 
   console.log("contract balance: ", contractBalance);
 

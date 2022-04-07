@@ -15,7 +15,7 @@ contract ETHAmsterdamFaucet is Ownable {
     //initialize cfaV1 variable
     CFAv1Library.InitData public cfaV1;
 
-    ISuperToken public frens;
+    ISuperToken public frens; 
 
     constructor(ISuperToken _frens, ISuperfluid host) {
       frens = _frens;

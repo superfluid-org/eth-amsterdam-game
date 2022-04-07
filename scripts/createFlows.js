@@ -30,7 +30,7 @@ async function main() {
     });
     const signer = sf.createSigner({
       privateKey:
-        "0xd2ebfb1517ee73c4bd3d209530a7e1c25352542843077109ae77a2c0213375f1",
+        process.env.AMSTERDAM_PRIVATE_KEY,
       provider: customHttpProvider
     });
 
