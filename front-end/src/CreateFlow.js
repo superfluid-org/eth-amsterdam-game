@@ -9,7 +9,7 @@ async function createNewFlow(code, address) {
 
     console.log("Creating your stream...");
     const body = {code, address };
-    const response = await fetch("https://cs3ssh7s6alf2z3kugcemh7ozi0rxfow.lambda-url.eu-west-2.on.aws/", {
+    const response = await fetch("http://localhost:5000/create-stream", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
@@ -67,7 +67,7 @@ async function createNewFlow(code, address) {
         {
           showSuccess? 
           <Toast onClose={() => setShowSuccess(false)} show={showSuccess} delay={3000} autohide>
-            <Toast.Body>Your stream has been created! Check the Superfluid dashboard at app.superfluid.finance</Toast.Body>
+            <Toast.Body>Your stream has been created! Check the Superfluid dashboard at  <a href="http://app.superfluid.finance">app.superfluid.finance</a></Toast.Body>
           </Toast>
           : ""
         }

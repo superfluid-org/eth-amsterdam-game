@@ -929,6 +929,10 @@ app.post("/create-stream", async (req, res) => {
                 "D0PU5q",
                 "HATHoN",
                 "Sp43Xk", //NOTE - code has been used
+                "123456",
+                "555555",
+                "777777",
+                "888888"
                 ];
 
             let codeValid = false;
@@ -941,6 +945,8 @@ app.post("/create-stream", async (req, res) => {
 
             if (codeValid == false) {
                 console.log("this code does not exist my fren");
+                res.status(500).send('stream not created');
+
             }
 
             else {
