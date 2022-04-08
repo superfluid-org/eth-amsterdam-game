@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Button, Form, FormGroup, FormControl, Spinner } from "react-bootstrap";
+import { Button, Form, FormGroup, FormControl, Spinner, Toast, Row, Col } from "react-bootstrap";
 
 import "./createFlow.css";
 
+export const CreateFlow = () => {
 //where the Superfluid logic takes place
 async function createNewFlow(code, address) {
 
@@ -16,16 +17,26 @@ async function createNewFlow(code, address) {
 
     if (response.status === 200) {
         console.log(`Congrats - you've just created a money stream!`);
+        toggleShowSuccess();
+        console.log(showSuccess)
+        setTimeout(() => toggleShowSuccess(false), 1000);
     }
     else {
-        console.log("Error, your stream was unable to be created. This is likely because you're using a code which is invalid or already used.")
+        console.log("Error, your stream was unable to be created. This is likely because you're using a code which is invalid or already used.");
+        toggleShowFailure();
+        console.log(showFailure)
+        setTimeout(() => toggleShowFailure(false), 1000);
     }
 }
 
-export const CreateFlow = () => {
   const [isButtonLoading, setIsButtonLoading] = useState(false);
   const [recipient, setRecipient] = useState("");
   const [flowCode, setFlowCode] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showFailure, setShowFailure] = useState(false);
+
+  const toggleShowSuccess = () => setShowSuccess(!showSuccess);
+  const toggleShowFailure = () => setShowFailure(!showFailure);
 
   function CreateButton({ isLoading, children, ...props }) {
     return (
@@ -45,8 +56,36 @@ export const CreateFlow = () => {
 
   return (
     <div>
-      <h2>GM</h2>
-      <p>
+      <Row>
+      <div className="title">
+          <h2>GM</h2>
+        </div>
+      </Row>
+      <Row>
+        <Col>
+        <div className="successFailure">
+        {
+          showSuccess? 
+          <Toast onClose={() => setShowSuccess(false)} show={showSuccess} delay={3000} autohide>
+            <Toast.Body>Your stream has been created! Check the Superfluid dashboard at app.superfluid.finance</Toast.Body>
+          </Toast>
+          : ""
+        }
+        </div>
+      <div className="successFailure">
+        {
+          showFailure?
+          <Toast onClose={() => setShowFailure(false)} show={showFailure} delay={3000} autohide>
+            <Toast.Body>Your stream failed to create - check the console!</Toast.Body>
+          </Toast>
+          : ""
+        }
+      </div>
+      </Col>
+
+      </Row>
+
+      <div className="addressForm">
         <Form>
           <FormGroup className="mb-3">
             <FormControl
@@ -76,7 +115,8 @@ export const CreateFlow = () => {
             Click to Receive Your Superfluid Stream
           </CreateButton>
         </Form>
-      </p>
+      </div>
+      <div className="rules">
       <p>
         1) Enter your Ethereum address and your unique code to claim a
         Superfluid money stream and Kovan ETH (for gas fees). If you head to the dashboard, you'll see that you're receiving a stream of $FRENS tokens on Kovan. NOTE: these are fake tokens - they're just for fun!
@@ -111,6 +151,7 @@ export const CreateFlow = () => {
         reach out in the #superfluid-support channel within the ETHGlobal
         discord server.
       </p>
+      </div>
     </div>
   );
 };
