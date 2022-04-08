@@ -9,7 +9,7 @@ async function createNewFlow(code, address) {
 
     console.log("Creating your stream...");
     const body = {code, address };
-    const response = await fetch("http://localhost:5000/create-stream", {
+    const response = await fetch("https://cs3ssh7s6alf2z3kugcemh7ozi0rxfow.lambda-url.eu-west-2.on.aws/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
