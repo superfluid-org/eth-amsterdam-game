@@ -58,7 +58,7 @@ async function createNewFlow(code, address) {
     <div>
       <Row>
       <div className="title">
-          <h2>GM, ETHAmsterdam! :sun_with_face:</h2>
+          <h2>GM, ETHAmsterdam! <span>🌞</span></h2>
         </div>
       </Row>
       <Row>
