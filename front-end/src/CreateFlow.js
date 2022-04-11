@@ -58,7 +58,7 @@ async function createNewFlow(code, address) {
     <div>
       <Row>
       <div className="title">
-          <h2>GM</h2>
+          <h2>GM, ETHAmsterdam! :sun_with_face:</h2>
         </div>
       </Row>
       <Row>
@@ -127,12 +127,12 @@ async function createNewFlow(code, address) {
         Dashboard at
         <a href="http://app.superfluid.finance"> app.superfluid.finance</a> to
         see your incoming stream, and be able to send outgoing streams to other
-        participants at ETH Amsterdam!
+        participants at ETHAmsterdam!
       </p>
       <p>
         3)
         <b>
-          Your goal is to send streams to as many other hackers at ETH Amsterdam
+          Your goal is to send streams to as many other hackers at ETHAmsterdam
           as possible.
         </b>
         Each hacker received a special code which represents their participation
@@ -142,7 +142,7 @@ async function createNewFlow(code, address) {
         4)
         <b>
           The Top 10 builders who send streams to the most other addresses at
-          ETH Amsterdam will receive a Super Special™️ NFT and swag designed by
+          ETHAmsterdam will receive a Super Special™️ NFT and swag designed by
           the Superfluid team!
         </b>
       </p>
