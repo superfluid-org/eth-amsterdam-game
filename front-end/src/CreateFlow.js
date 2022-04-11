@@ -15,17 +15,15 @@ async function createNewFlow(code, address) {
         body: JSON.stringify(body)
     });
 
-    if (response.status === 200) {
+    if (response.status === 200 || response.status === 202) {
         console.log(`Congrats - you've just created a money stream!`);
         toggleShowSuccess();
-        console.log(showSuccess)
         setTimeout(() => toggleShowSuccess(false), 1000);
     }
     else {
         console.log("Error, your stream was unable to be created. This is likely because you're using a code which is invalid or already used.");
         console.log(response)
         toggleShowFailure();
-        console.log(showFailure)
         setTimeout(() => toggleShowFailure(false), 1000);
     }
 }
@@ -118,7 +116,7 @@ async function createNewFlow(code, address) {
         </Form>
       </div>
       <div className="rules">
-      <h3>What Is "Stream it Forward"?</h3>
+      <h3>Streaming it Forward</h3>
       <p>
         One of our favourite things about in-person hackathons is the opportunity to make new friends!
       </p>
@@ -126,7 +124,7 @@ async function createNewFlow(code, address) {
         However, it can be intimidating to introduce yourself to strangers...
       </p>
       <p>
-        That's why we decided to create <b>Stream It Forward</b>: a fun game to break the ice at hackathons, experience digital asset streaming firsthand, and win Superfluid swag <span>🌊</span>
+        That's why we decided to create the <b>$FRENS game</b>: a fun game to break the ice at hackathons, experience digital asset streaming firsthand, and win Superfluid swag <span>🌊</span>
       </p>
       <h3>How to Play</h3>
       <p>
