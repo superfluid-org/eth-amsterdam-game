@@ -118,33 +118,38 @@ async function createNewFlow(code, address) {
         </Form>
       </div>
       <div className="rules">
+      <h3>What Is "Stream it Forward"?</h3>
       <p>
-        1) Enter your Ethereum address and your unique code to claim a
-        Superfluid money stream and Kovan ETH (for gas fees). If you head to the dashboard, you'll see that you're receiving a stream of $FRENS tokens on Kovan. NOTE: these are fake tokens - they're just for fun!
+        One of our favourite things about in-person hackathons is the opportunity to make new friends!
+      </p>
+      <p>
+        However, it can be intimidating to introduce yourself to strangers...
+      </p>
+      <p>
+        That's why we decided to create <b>Stream It Forward</b>: a fun game to break the ice at hackathons, experience digital asset streaming firsthand, and win Superfluid swag <span>🌊</span>
+      </p>
+      <h3>How to Play</h3>
+      <p>
+        1) Enter your Ethereum address and your add your unique 6 digit code found on the Superfluid flyer in your swag pack to claim your Superfluid money stream and Kovan ETH (for gas fees). If you head to the <a href="http://app.superfluid.finance"> Superfluid dashboard</a>, you'll see that you're receiving a stream of $FRENS tokens on Kovan. NOTE: these are fake tokens - they're just for fun! <span>✅</span>
       </p>
       <p>
 
         2) Once you claim your stream, you’ll be able to head to the Superfluid
-        Dashboard at
-        <a href="http://app.superfluid.finance"> app.superfluid.finance</a> to
+        Dashboard at <a href="http://app.superfluid.finance"> app.superfluid.finance</a> to
         see your incoming stream, and be able to send outgoing streams to other
-        participants at ETHAmsterdam!
+        participants at ETHAmsterdam! <span>🥳</span>
       </p>
       <p>
-        3)
-        <b>
+        3) <b>
           Your goal is to send streams to as many other hackers at ETHAmsterdam
           as possible.
-        </b>
-        Each hacker received a special code which represents their participation
+        </b> Each hacker at ETHAmsterdam received a special code which represents their participation
         in the game. Sending streams to non hackers will not help your score.
       </p>
-      <p>
-        4)
-        <b>
+      <p>4) <b>
           The Top 10 builders who send streams to the most other addresses at
           ETHAmsterdam will receive a Super Special™️ NFT and swag designed by
-          the Superfluid team!
+          the Superfluid team! <span>🎁</span>
         </b>
       </p>
       <p>
