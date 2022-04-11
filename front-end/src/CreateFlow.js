@@ -23,6 +23,7 @@ async function createNewFlow(code, address) {
     }
     else {
         console.log("Error, your stream was unable to be created. This is likely because you're using a code which is invalid or already used.");
+        console.log(response.body)
         toggleShowFailure();
         console.log(showFailure)
         setTimeout(() => toggleShowFailure(false), 1000);
