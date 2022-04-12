@@ -116,7 +116,7 @@ async function createNewFlow(code, address) {
         </Form>
       </div>
       <div className="rules">
-      <h3>Streaming it Forward</h3>
+      <h3>What is the $FRENS Game?</h3>
       <p>
         One of our favourite things about in-person hackathons is the opportunity to make new friends!
       </p>
