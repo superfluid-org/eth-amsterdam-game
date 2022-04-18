@@ -33,7 +33,7 @@ async function main() {
   
   const approveOperation = frens.approve({
       receiver: "0xD157b900532aED20709eF0e313896d7683BbEED4",
-      amount: ethers.utils.parseUnits("100000").toString()
+      amount: ethers.utils.parseUnits("1000000").toString()
   });;
 
   const txn = await approveOperation.exec(signer);
@@ -50,7 +50,7 @@ async function main() {
   console.log("funding the contract...");
 
   console.log(signer.address)
-  await deployedContract.connect(signer).fundContract(ethers.utils.parseEther("10000"));
+  await deployedContract.connect(signer).fundContract(ethers.utils.parseEther("1000000"));
   
   const contractBalance = await frens.balanceOf({account: "0xD157b900532aED20709eF0e313896d7683BbEED4", providerOrSigner: customHttpProvider});
 
@@ -62,7 +62,7 @@ async function main() {
   let tx = {
     to: deployedContract.address,
     // Convert currency unit from ether to wei
-    value: ethers.utils.parseEther("0.5"),
+    value: ethers.utils.parseEther("0.01"),
     gasPrice: 100000000000
 }       
 
